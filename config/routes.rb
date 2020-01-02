@@ -7,4 +7,9 @@ Rails.application.routes.draw do
     get "lesson/step#{n}(/:name)" => "lesson#step#{n}"
   end
 
+  resources :members do
+    get "search", on: :collection
+  end
+
+
 end

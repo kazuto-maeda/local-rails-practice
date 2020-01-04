@@ -28,7 +28,7 @@
           <td><%= member.full_name %></td>
           <td>
             <%= link_to("編集", [:edit, member]) %>|
-            <%= link_to("削除", member, method: :destroy, date: { confirm: "本当に削除しますか？"})%>
+            <%= link_to("削除", member, method: :delete, data: { confirm: "本当に削除しますか？"})%>
           </td>
         </tr>
       <% end %>

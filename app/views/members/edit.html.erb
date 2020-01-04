@@ -1,0 +1,8 @@
+<% @page_title = "会員情報の編集"%>
+
+<h1><%= @page_title %></h1>
+
+<%= form_for @member do |form| %>
+  <%= render("form", form: form)%>
+  <div><%= form.submit "更新"%></div>
+<% end %>

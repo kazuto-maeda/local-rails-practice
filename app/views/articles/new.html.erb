@@ -1,0 +1,11 @@
+<% @page_title = "ニュース記事の新規作成" %>
+<h1><%= @page_title %></h1>
+
+<%= link_to("ニュース一覧に戻る", :articles )%>
+
+<%= form_for(@article) do |form| %>
+  <%= render("form", form: form)%>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

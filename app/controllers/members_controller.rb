@@ -1,7 +1,8 @@
 class MembersController < ApplicationController
+  before_action :login_required
 
   def index
-    @members = Member.order("number")
+    @members = Member.order("number").page(params[:page]).per(15)
   end
 
   def show
@@ -41,8 +42,10 @@ class MembersController < ApplicationController
     redirect_to(:members, notice: "会員情報を削除しました")
   end
 
+  private
+
   def search
-    @members = Member.search(params[:q])
+    @members = Member.search(params[:q]).page(params[:page]).per(15)
     render "index"
   end
 end

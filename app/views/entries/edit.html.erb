@@ -1,0 +1,7 @@
+<% @page_title = "ブログの更新" %>
+<h1><%= @page_title %></h1>
+
+<%= form_for(@entry) do |form| %>
+  <%= render("form", form: form)%>
+  <div><%= form.submit("更新する") %></div>
+<% end %>

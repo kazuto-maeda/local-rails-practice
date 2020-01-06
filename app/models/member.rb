@@ -1,5 +1,8 @@
 class Member < ApplicationRecord
 
+  has_secure_password
+  has_many :entries, dependent: :destroy
+
   validates :number,
     presence: true,
     numericality: {
@@ -20,6 +23,9 @@ class Member < ApplicationRecord
     uniqueness: { case_sensitive: false }
   validates :full_name, presence: true, length: { maximum: 20 }
   validates :email, email: { allow_blank: true }
+
+  attr_accessor :current_password
+  validates :password, presence: { if: :current_password }
 
   class << self
     def search(query)

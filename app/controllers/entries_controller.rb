@@ -21,7 +21,7 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = current_member.entries.build(params[:entry])
+    @entry = current_member.entries.build(entry_params)
     if @entry.save
       redirect_to(:entries, notice: "ブログも記事を作成しました")
     else
@@ -35,7 +35,7 @@ class EntriesController < ApplicationController
 
   def update
     @entry = current_member.entries.find(params[:id])
-    @entry.assign_attributes(params[:entry])
+    @entry.assign_attributes(entry_params)
     if @entry.save
       redirect_to(:entries, notice: "ブログの記事を更新しました")
     else
@@ -48,4 +48,10 @@ class EntriesController < ApplicationController
     @entry.destroy
     redirect_to(:entries, notice: "ブログの記事を削除しました")
   end
+
+  private
+    def entry_params
+      params.require(:entry).permit(:member_id, :title, :body, :posted_at, :status)
+
+    end
 end

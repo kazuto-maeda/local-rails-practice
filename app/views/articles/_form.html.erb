@@ -13,8 +13,8 @@
     <th><%= form.label :released_at, for: "article_released_at_1i"%></th>
     <td>
       <%= form.datetime_select :released_at,
-      start_year: 2000, end_year: Time.current.year + 1,
-      use_month_numbers: true %>
+            start_year: 2000, end_year: Time.current.year + 1,
+            use_month_numbers: true %>
     </td>
   </tr>
   <tr>
@@ -24,10 +24,10 @@
         <%= form.check_box :no_expiration %>
         <%= form.label :no_expiration %>
       </div>
-      <div>
+      <div id = "article_expired_at">
         <%= form.datetime_select :expired_at,
-        start_year: 2000, end_year: Time.current.year + 1,
-        use_month_numbers: true %>
+              start_year: 2000, end_year: Time.current.year + 1,
+              use_month_numbers: true %>
       </div>
     </td>
   </tr>

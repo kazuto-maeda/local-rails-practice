@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   resource :password, only: [:shoe, :edit, :update]
   resources :articles
   resources :entries
+
+  get "bad_request" => "top#bad_request"
+  get "forbidden" => "top#forbidden"
+  get "internal_server_error" => "top#internal_server_error"
 end

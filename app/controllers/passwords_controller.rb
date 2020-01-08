@@ -11,13 +11,13 @@ class PasswordsController < ApplicationController
 
   def update
     @member = current_member
-    current_password = params[:account][:current_password]
+    current_password = password_params[:current_password]
 
     if current_password.present?
       if @member.authenticate(current_password)
-        @member.assign_attributes(params[:account])
+        @member.assign_attributes(password_params)
         if @member.save
-          redirect_to(:root, notice: "パスワードを更新しました")
+          redirect_to(:account, notice: "パスワードを更新しました")
         else
           render("edit")
         end
@@ -29,5 +29,9 @@ class PasswordsController < ApplicationController
       @member.errors.add(:current_password, :empty)
       render("edit")
     end
+  end
+
+  def password_params
+    params.require(:account).permit(:current_password, :password, :password_confirmation)
   end
 end

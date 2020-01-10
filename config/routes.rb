@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'entry_images/index'
+  get 'entry_images/new'
+  get 'entry_images/edit'
   get 'entries/index'
   get 'entries/show'
   get 'entries/edit'
@@ -19,7 +22,11 @@ Rails.application.routes.draw do
   resource :account, only: [:show, :edit, :update]
   resource :password, only: [:shoe, :edit, :update]
   resources :articles
-  resources :entries
+  resources :entries do
+    resources :images, controller: "entry_images" do
+      patch :move_higher, :move_lower, on: :member
+    end
+  end
 
   get "bad_request" => "top#bad_request"
   get "forbidden" => "top#forbidden"

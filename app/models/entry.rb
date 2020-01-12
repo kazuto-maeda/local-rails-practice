@@ -2,6 +2,9 @@ class Entry < ApplicationRecord
   belongs_to :author, class_name: "Member", foreign_key: "member_id"
   has_many :images, class_name: "EntryImage"
 
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :member
+
   STATUS_VARUES = %w{draft member_only public}
 
   validates :title, presence: true, length: { maximum: 200}
@@ -13,6 +16,7 @@ class Entry < ApplicationRecord
   scope :full, -> (member) { where("status <> ? OR member_id = ?", "draft", member.id) }
   scope :readable_for, -> (member) {member ? full(member) : common}
 
+  
   class << self
     def status_text(status)
       I18n.t("activerecord.attributes.entry.status_#{status}")

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'top/index'
+  end
   get 'entry_images/index'
   get 'entry_images/new'
   get 'entry_images/edit'
@@ -14,14 +17,14 @@ Rails.application.routes.draw do
     get "lesson/step#{n}(/:name)" => "lesson#step#{n}"
   end
 
-  resources :members do
+  resources :members, only: [:index, :show] do
     get "search", on: :collection
     resources :entries, only: [:index]
   end
   resource :session, only: [:create, :destroy]
   resource :account, only: [:show, :edit, :update]
   resource :password, only: [:shoe, :edit, :update]
-  resources :articles
+  resources :articles, only: [:index, :show]
   resources :entries do
     patch "like" , "unlike", on: :member
     get "voted", on: :collection
@@ -33,4 +36,12 @@ Rails.application.routes.draw do
   get "bad_request" => "top#bad_request"
   get "forbidden" => "top#forbidden"
   get "internal_server_error" => "top#internal_server_error"
+
+  namespace :admin do
+    root to: "top#index"
+    resources :members do
+      get "search", on: :collection
+    end
+    resources :articles
+  end
 end

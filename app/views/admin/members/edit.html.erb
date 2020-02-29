@@ -2,7 +2,11 @@
 
 <h1><%= @page_title %></h1>
 
-<%= form_for @member do |form| %>
+<div>
+  <%= link_to("会員詳細に戻る", [:admin, @mamber]) %>
+</div>
+
+<%= form_for [:admin, @member] do |form| %>
   <%= render("shared/member_form", form: form)%>
   <div><%= form.submit "更新"%></div>
 <% end %>
